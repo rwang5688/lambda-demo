@@ -62,6 +62,8 @@ Resources:
                 - lambda.amazonaws.com
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+        - arn:aws:iam::aws:policy/AmazonS3FullAccess
+        - arn:aws:iam::aws:policy/AWSConfigUserAccess
 
   LambdaLogGroup:
     Type: AWS::Logs::LogGroup
