@@ -11,7 +11,7 @@ def lambda_handler(event, context):
             "Content-Type": "application/json"
         },
         "body": json.dumps({
-            "Greeting": "Hello World from Python Lambda Function!!!",
+            "Greeting": "Hello World from Python Lambda Function version: 2021-06-13!!!",
             "Region": region,
             "Version": "0.1"
         })
