@@ -1,0 +1,31 @@
+[
+  {
+    "ParameterKey": "LambdaFunctionName",
+    "ParameterValue": "lambda-function-nodejs"
+  },
+  {
+    "ParameterKey": "LambdaFunctionDeploymentBucket",
+    "ParameterValue": "wangrob-lambda-function-nodejs"
+  },
+  {
+    "ParameterKey": "LambdaFunctionDeploymentPackage",
+    "ParameterValue": "lambda-function-nodejs.zip"
+  },
+  {
+    "ParameterKey": "LambdaFunctionHandler",
+    "ParameterValue": "index.handler"
+  },
+  {
+    "ParameterKey": "RestApiName",
+    "ParameterValue": "lambda-function-nodejs-api"
+  },
+  {
+    "ParameterKey": "RestApiMethodName",
+    "ParameterValue": "GET"
+  },
+  {
+    "ParameterKey": "RestApiStageName",
+    "ParameterValue": "dev"
+  }
+]
+

@@ -8,8 +8,7 @@
 						document.getElementById("nodejs-lambda-function").innerHTML = this.responseText;
 					}
 				};
-				// use same API endpoint as python lambda function for now
-				xhttp.open("GET", "https://476227pq6k.execute-api.us-east-1.amazonaws.com/dev", true);
+				xhttp.open("GET", "https://4hcrwpchsf.execute-api.us-east-1.amazonaws.com/dev", true);
 				xhttp.send();
 			}
 
@@ -20,7 +19,7 @@
 						document.getElementById("python-lambda-function").innerHTML = this.responseText;
 					}
 				};
-				xhttp.open("GET", "https://476227pq6k.execute-api.us-east-1.amazonaws.com/dev", true);
+				xhttp.open("GET", "https://rwba9lh0h6.execute-api.us-east-1.amazonaws.com/dev", true);
 				xhttp.send();
 			}
 		</script>
@@ -29,11 +28,11 @@
 	<div align="center">
 		<br>
 		<br>
-		<h1><span id="nodejs-lambda-function">Hello World!!! from NodeJS Lambda Functions version: 2021-06-13</span></h1>
+		<h1><span id="nodejs-lambda-function">Hello World!!! from NodeJS Lambda Functions version: 2021-06-17</span></h1>
 		<button onclick="nodejsLambdaFunction()">Click me</button>
 		<br>
 		<br>
-		<h1><span id="python-lambda-function">Hello World!!! from Python Lambda Functions version: 2021-06-13</span></h1>
+		<h1><span id="python-lambda-function">Hello World!!! from Python Lambda Functions version: 2021-06-17</span></h1>
 		<button onclick="pythonLambdaFunction()">Click me</button>
 	</div>
 	</body>

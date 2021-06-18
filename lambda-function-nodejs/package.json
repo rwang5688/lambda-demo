@@ -1,0 +1,17 @@
+{
+  "name": "lambda-function-nodejs",
+  "version": "1.0.0",
+  "description": "lambda-function-nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "rwang5688@outlook.com",
+  "license": "ISC",
+  "dependencies": {
+    "immutable": "^4.0.0-rc.12"
+  },
+  "devDependencies": {
+    "jest": "^27.0.4"
+  }
+}

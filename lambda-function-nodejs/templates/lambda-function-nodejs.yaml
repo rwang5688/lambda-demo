@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: Python Lambda Function and REST API Template
+Description: NodeJS Lambda Function and REST API Template
 
 Parameters:
   LambdaFunctionName:
@@ -7,7 +7,7 @@ Parameters:
     Type: String
     ConstraintDescription: Lambda Function Name
     AllowedPattern: "[a-zA-Z0-9]+[a-zA-Z0-9-]+[a-zA-Z0-9]+"
-    Default: lambda-function-python
+    Default: lambda-function-nodejs
   LambdaFunctionDeploymentBucket:
     Description: Deployment Bucket Bame
     Type: String
@@ -20,12 +20,12 @@ Parameters:
     Description: Lambda Function Handler (Entry Point)
     Type: String
     ConstraintDescription: Lambda Function Handler (Entry Point)
-    Default: lambda_function.lambda_handler
+    Default: index.handler
   RestApiName:
     Description: REST API Name
     Type: String
     ConstraintDescription: REST API Name
-    Default: lambda-function-python-api
+    Default: lambda-function-nodejs-api
   RestApiMethodName:
     Description: REST API Method Name
     Type: String
@@ -82,7 +82,7 @@ Resources:
       Handler: !Ref LambdaFunctionHandler
       MemorySize: 128
       Role: !GetAtt LambdaIamRole.Arn
-      Runtime: python3.8
+      Runtime: nodejs14.x
       Timeout: 5
       TracingConfig:
         Mode: Active
