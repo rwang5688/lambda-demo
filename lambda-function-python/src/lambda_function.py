@@ -3,11 +3,16 @@ import json
 import s3_util
 
 def get_buckets_list():
-    target_profile = 'default'
+    target_profile = None
     target_region = os.environ['AWS_REGION']
     result = s3_util.get_buckets_list(target_profile, target_region)
 
-    print("result = " % result)
+    files_list = []
+    if len(result) > 0:
+        files_list = s3_util.get_files_list(target_profile, target_region, result[0])
+
+    print("result = %s" % result)
+    print("result[0] files_list = %s" % files_list)
     return result
 
 def handler(event, context):
@@ -27,8 +32,7 @@ def handler(event, context):
         },
         "body": json.dumps({
             "Greeting": "Hello World!!! from Python handler, version: 2021-06-20.",
-            "result": result,
-            "Version": "0.1"
+            "result": result
         })
     }
     

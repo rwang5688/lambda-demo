@@ -26,8 +26,7 @@ exports.handler = async(event) => {
         },
         "body": JSON.stringify({
             "Greeting": "Hello World!!! from NodeJS handler, version: 2021-06-20.",
-            "result": result,
-            "Version": "0.1"
+            "result": result
         })
     };
 

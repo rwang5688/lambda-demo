@@ -21,7 +21,8 @@ def get_buckets_list(profile_name, region_name):
     # get list of bucket names
     result = []
     if 'Buckets' in response:
-        result = response['Buckets']
+        for bucket in response['Buckets']:
+            result.append(bucket["Name"])
     
     return result
 
@@ -49,7 +50,8 @@ def get_files_list(profile_name, region_name, bucket_name):
     # get list of object keys
     result = []
     if 'Contents' in response:
-        result = response['Contents']
+        for object in response['Contents']:
+            result.append(object["Key"])
     
     return result
     
