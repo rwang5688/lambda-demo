@@ -13,7 +13,7 @@
   },
   {
     "ParameterKey": "LambdaFunctionHandler",
-    "ParameterValue": "lambda_function.lambda_handler"
+    "ParameterValue": "lambda_function.handler"
   },
   {
     "ParameterKey": "RestApiName",

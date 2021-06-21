@@ -4,33 +4,31 @@ import boto3
 from botocore.exceptions import ClientError
 
 
-def get_s3_client():
-    region_name = ''
-    if 'TARGET_REGION' in os.environ:
-        region_name = os.environ['TARGET_REGION']
-    print('get_s3_client: region_name=%s' % region_name)
+def get_s3_client(profile_name, region_name):
+    print('get_s3_client: profile_name=%s, region_name=%s' % (profile_name, region_name))
 
-    session = boto3.Session(profile_name=None)
+    session = boto3.Session(profile_name=profile_name)
     s3 = session.client('s3',
         region_name=region_name)
     return s3
 
 
-def list_buckets():
+def get_buckets_list(profile_name, region_name):
     # Retrieve the list of existing buckets
-    s3 = get_s3_client()
+    s3 = get_s3_client(profile_name, region_name)
     response = s3.list_buckets()
 
-    # Print bucket names
-    print('\nBuckets:')
+    # get list of bucket names
+    result = []
     if 'Buckets' in response:
-        for bucket in response['Buckets']:
-            print('Name: %s' % bucket["Name"])
+        result = response['Buckets']
+    
+    return result
 
 
-def get_bucket(bucket_name):
+def get_bucket(profile_name, region_name, bucket_name):
     # Retrieve the list of existing buckets
-    s3 = get_s3_client()
+    s3 = get_s3_client(profile_name, region_name)
     response = s3.list_buckets()
 
     # Find the bucket by name
@@ -43,8 +41,21 @@ def get_bucket(bucket_name):
     return result
 
 
-def file_exists(bucket_name, object_name):
-    s3 = get_s3_client()
+def get_files_list(profile_name, region_name, bucket_name):
+    # Retrieve the list of existing files
+    s3 = get_s3_client(profile_name, region_name)
+    response = s3.list_objects_v2(Bucket=bucket_name)
+
+    # get list of object keys
+    result = []
+    if 'Contents' in response:
+        result = response['Contents']
+    
+    return result
+    
+       
+def file_exists(profile_name, region_name, bucket_name, object_name):
+    s3 = get_s3_client(profile_name, region_name)
     try:
         head_object = s3.head_object(Bucket=bucket_name, Key=object_name)
         print("s3util.file_exists: object_name=%s, head_object=%s" % (object_name, head_object))
@@ -60,8 +71,8 @@ def file_exists(bucket_name, object_name):
         return True
 
 
-def get_file_blob(bucket_name, object_name):
-    s3 = get_s3_client()
+def get_file_blob(profile_name, region_name, bucket_name, object_name):
+    s3 = get_s3_client(profile_name, region_name)
     result = None
     try:
         file_object = s3.get_object(Bucket=bucket_name, Key=object_name)
@@ -82,24 +93,11 @@ def get_file_blob(bucket_name, object_name):
         return result
 
 
-def list_files(bucket_name):
-    # Retrieve the list of existing files
-    s3 = get_s3_client()
-    response = s3.list_objects_v2(Bucket=bucket_name)
-
-    # Print bucket name and object keys
-    print('\nBucket: %s' % response["Name"])
-    print('Contents:')
-    if 'Contents' in response:
-        for bucketFile in response['Contents']:
-            print('Key: %s' % bucketFile["Key"])
-
-
-def upload_file(file_name, bucket_name, object_name=None):
+def upload_file(profile_name, region_name, file_name, bucket_name, object_name=None):
     if object_name is None:
         object_name = file_name
 
-    s3 = get_s3_client()
+    s3 = get_s3_client(profile_name, region_name)
     try:
         response = s3.upload_file(file_name, bucket_name, object_name)
         print('s3util.upload_file: file_name=%s, response=%s' % (file_name, response))
@@ -111,11 +109,11 @@ def upload_file(file_name, bucket_name, object_name=None):
         return True
 
 
-def download_file(bucket_name, object_name, file_name=None):
+def download_file(profile_name, region_name, bucket_name, object_name, file_name=None):
     if file_name is None:
         file_name = object_name
 
-    s3 = get_s3_client()
+    s3 = get_s3_client(profile_name, region_name)
     try:
         response = s3.download_file(bucket_name, object_name, file_name)
         print('s3util.download_file: object_name=%s, response=%s' % (object_name, response))
