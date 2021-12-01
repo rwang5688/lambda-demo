@@ -133,7 +133,7 @@ Outputs:
     Description: Lambda Function ARN
     Value: !GetAtt LambdaFunction.Arn
 
-  RestApiInvokeURL:
+  RestApiInvokeUrl:
     Description: REST API Invoke URL
     Value: !Sub https://${RestApi}.execute-api.${AWS::Region}.amazonaws.com/${RestApiStageName}
 
